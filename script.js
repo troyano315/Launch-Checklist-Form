@@ -2,16 +2,18 @@
 window.addEventListener("load", function(){
 
    let formNode = document.getElementById("launchForm");
+   let pilotName = document.getElementById("pilotName");
+   let copilotName = document.getElementById("copilotName");
+   let fuelLevel = document.getElementById("fuelLevel");
+   let cargoMass = document.getElementById("cargoMass");
+      pilotName.value
+      
    formNode.addEventListener("submit", function(event){
-       let pilotNameNode = document.getElementById("pilotName");
-       let copilotNameNode = document.getElementById("copilotName");
-       let fuelLevelNode = document.getElementById("fuelLevel");
-       let cargoMassNode = document.getElementById("cargoMass");
-
-       if (pilotNameNode.value.length === 0) {
+       
+       if (pilotName.value.length === 0) {
            event.preventDefault();
            alert("Please fill out all boxes")
-       } else if (copilotNameNode.value.length === 0){
+       } else if (copilotName.value.length === 0){
          event.preventDefault();
          alert("Please fill out all boxes")
        } else if (isNaN(fuelLevel.value)){
@@ -20,11 +22,17 @@ window.addEventListener("load", function(){
        } else if (isNaN(cargoMass.value)){
          event.preventDefault();
          alert("Please enter a number for cargoMass")
-       }
+       };
 
    });
 
-
+   
+let pilotStatusNode = document.getElementById("pilotStatus")
+   
+pilotStatusNode.innerHTML = `
+  pilotStatus ${pilotName.value}
+   `;
+   console.log(pilotName.value)
 })
 
 
