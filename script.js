@@ -10,16 +10,16 @@ window.addEventListener("load", function(){
 
        if (pilotNameNode.value.length === 0) {
            event.preventDefault();
-           alert("Test")
-       } else if ((copilotNameNode.value.length === 0)){
+           alert("Please fill out all boxes")
+       } else if (copilotNameNode.value.length === 0){
          event.preventDefault();
-         alert("Test")
-       } else if ((fuelLevel.value.length === 0)){
+         alert("Please fill out all boxes")
+       } else if (isNaN(fuelLevel.value)){
          event.preventDefault();
-         alert("Test")
-       } else if ((cargoMass.value.length === 0)){
+         alert("Please enter a number for fuelLevel")
+       } else if (isNaN(cargoMass.value)){
          event.preventDefault();
-         alert("Test")
+         alert("Please enter a number for cargoMass")
        }
 
    });
