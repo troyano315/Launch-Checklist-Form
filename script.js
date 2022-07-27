@@ -7,32 +7,38 @@ window.addEventListener("load", function(){
    let fuelLevel = document.getElementById("fuelLevel");
    let cargoMass = document.getElementById("cargoMass");
       pilotName.value
-      
+
    formNode.addEventListener("submit", function(event){
-       
+    event.preventDefault();   
+
        if (pilotName.value.length === 0) {
-           event.preventDefault();
+         //event.preventDefault();
            alert("Please fill out all boxes")
        } else if (copilotName.value.length === 0){
-         event.preventDefault();
+         //event.preventDefault();
          alert("Please fill out all boxes")
-       } else if (isNaN(fuelLevel.value)){
-         event.preventDefault();
-         alert("Please enter a number for fuelLevel")
-       } else if (isNaN(cargoMass.value)){
-         event.preventDefault();
+       } else if (isNaN(fuelLevel.value) || fuelLevel.value.length === 0 || fuelLevel.value < 10000){
+         //event.preventDefault();
+         alert("Please enter a number over 10000 for fuelLevel")
+       } else if (isNaN(cargoMass.value) || cargoMass.value.length === 0){
+         //event.preventDefault();
          alert("Please enter a number for cargoMass")
        };
+
+       let itemStatusNode = document.getElementById("itemStatus")
+   
+itemStatusNode.innerHTML = `
+<li id="pilotStatus">${pilotName.value}</li>
+<li id="copilotStatus">${copilotName.value}</li>
+<li id="fuelStatus">${fuelLevel.value}</li>
+<li id="cargoStatus">${cargoMass.value}</li>
+`;
+   console.log(pilotName.value)
 
    });
 
    
-let pilotStatusNode = document.getElementById("pilotStatus")
-   
-pilotStatusNode.innerHTML = `
-  pilotStatus ${pilotName.value}
-   `;
-   console.log(pilotName.value)
+
 })
 
 
