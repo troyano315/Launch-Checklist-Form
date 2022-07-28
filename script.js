@@ -27,10 +27,7 @@ window.addEventListener("load", function(){
          <h2 id="launchStatus" style="color:red">"Shuttle not ready for launch"</h2>
          `;
          itemStatusNode.innerHTML = `
-         <li id="pilotStatus">${pilotName.value} is not ready for launch</li>
-         <li id="copilotStatus">${copilotName.value} is not ready for launch</li>
          <li id="fuelStatus">Fuel level check failed. Please fill fuel over 10000 </li>
-         <li id="cargoStatus">Cargo Mass: ${cargoMass.value} </li>
          `;
        } else {
          launchStatusNode.innerHTML = `
@@ -49,9 +46,7 @@ window.addEventListener("load", function(){
          <h2 id="launchStatus" style="color:red">"Shuttle not ready for launch"</h2>
          `;
          itemStatusNode.innerHTML = `
-         <li id="pilotStatus">${pilotName.value} is not ready for launch</li>
-         <li id="copilotStatus">${copilotName.value} is not ready for launch</li>
-         <li id="cargoStatus">There is too much mass for the shuttle to take off.</li>
+         <li id="cargoStatus">There is too much mass for the shuttle to take off. Reduce mass under 10000</li>
          `;
        }
 
