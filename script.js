@@ -6,22 +6,19 @@ window.addEventListener("load", function(){
    let copilotName = document.getElementById("copilotName");
    let fuelLevel = document.getElementById("fuelLevel");
    let cargoMass = document.getElementById("cargoMass");
-   let itemStatusNode = document.getElementById("itemStatus")
-   let launchStatusNode = document.getElementById("launchStatus")
+   let itemStatusNode = document.getElementById("itemStatus");
+   let launchStatusNode = document.getElementById("launchStatus");
+   let missionTargetNode = document.getElementById("missionTarget");
    formNode.addEventListener("submit", function(event){
     event.preventDefault();   
 
        if (pilotName.value.length === 0 || !isNaN(pilotName.value)) {
-         //event.preventDefault();
            alert("Please enter a word for Pilot Name  ")
        } else if (copilotName.value.length === 0 || !isNaN(copilotName.value)){
-         //event.preventDefault();
          alert("Please enter a word for CoPilot Name ")
        } else if (isNaN(fuelLevel.value) || fuelLevel.value.length === 0){
-         //event.preventDefault();
          alert("Please enter a number for fuelLevel")
        } else if (isNaN(cargoMass.value) || cargoMass.value.length === 0){
-         //event.preventDefault();
          alert("Please enter a number for cargoMass")
        };
 

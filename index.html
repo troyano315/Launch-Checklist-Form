@@ -9,6 +9,29 @@
         <h1>Launch Checklist Form</h1>
         <div id="missionTarget">
             <!-- Fetch some planetary data -->
+            <script>
+                window.addEventListener("load", function(){
+                   // TODO: fetch planets JSON
+                   fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
+                      response.json().then(function(json) {
+                        let index = Math.floor(Math.random()*json.length);
+                         const destination = document.getElementById("missionTarget");
+                         let formNode = document.getElementById("launchForm");
+                            destination.innerHTML = `
+                                <h2>Mission Destination</h2>
+                               <ol>
+                                    <li>Planet ${json[index].name}</li>
+                                    <li> Diameter: ${json[index].diameter} </li>
+                                    <li> Star:${json[index].star} </li>
+                                    <li> Distance: ${json[index].distance} </li>
+                                    <li> Moons: ${json[index].moons} </li>
+                               </ol>
+                               <img src=${json[index].image} height=250></img>
+                            `;                    
+                      });
+                   });
+                        });
+             </script>
         </div> 
         
         <form id="launchForm">
