@@ -1,87 +1,104 @@
-// Write your JavaScript code here!
 window.addEventListener("load", function(){
 
-   let formNode = document.getElementById("launchForm");
-   let pilotName = document.getElementById("pilotName");
-   let copilotName = document.getElementById("copilotName");
-   let fuelLevel = document.getElementById("fuelLevel");
-   let cargoMass = document.getElementById("cargoMass");
-   let itemStatusNode = document.getElementById("itemStatus");
-   let launchStatusNode = document.getElementById("launchStatus");
-   let missionTargetNode = document.getElementById("missionTarget");
-   formNode.addEventListener("submit", function(event){
-    event.preventDefault();   
-
-       if (pilotName.value.length === 0 || !isNaN(pilotName.value)) {
-           alert("Please enter a word for Pilot Name  ")
-       } else if (copilotName.value.length === 0 || !isNaN(copilotName.value)){
-         alert("Please enter a word for CoPilot Name ")
-       } else if (isNaN(fuelLevel.value) || fuelLevel.value.length === 0){
-         alert("Please enter a number for fuelLevel")
-       } else if (isNaN(cargoMass.value) || cargoMass.value.length === 0){
-         alert("Please enter a number for cargoMass")
-       };
-
-       if (fuelLevel.value < 10000) {
-         launchStatusNode.innerHTML = `
-         <h2 id="launchStatus" style="color:red">"Shuttle not ready for launch"</h2>
-         `;
-         itemStatusNode.innerHTML = `
-         <li id="fuelStatus">Fuel level check failed. Please fill fuel over 10000 </li>
-         `;
-       } else {
-         launchStatusNode.innerHTML = `
-         <h2 id="launchStatus" style="color:green">"Shuttle is ready for launch"</h2>
-         `;
-         itemStatusNode.innerHTML = `
-         <li id="pilotStatus">${pilotName.value} is ready for launch</li>
-         <li id="copilotStatus">${copilotName.value} is ready for launch</li>
-         <li id="fuelStatus">Fuel level check passed</li>
-         <li id="cargoStatus">Cargo Mass: ${cargoMass.value}</li>
-         `;
-       }
-
-       if (cargoMass.value > 10000) {
-         launchStatusNode.innerHTML = `
-         <h2 id="launchStatus" style="color:red">"Shuttle not ready for launch"</h2>
-         `;
-         itemStatusNode.innerHTML = `
-         <li id="cargoStatus">There is too much mass for the shuttle to take off. Reduce mass under 10000</li>
-         `;
-       }
-
-   });
-
+    let formNode = document.getElementById("launchForm");
+    let pilotName = document.getElementById("pilotName");
+    let copilotName = document.getElementById("copilotName");
+    let fuelLevel = document.getElementById("fuelLevel");
+    let cargoMass = document.getElementById("cargoMass");
+    let itemStatusNode = document.getElementById("itemStatus");
+    let launchStatusNode = document.getElementById("launchStatus");
+    let missionTargetNode = document.getElementById("missionTarget");
+    formNode.addEventListener("submit", function(event){
+     event.preventDefault();
+     
+     let pilot_CopilotNotReady = pilotName.value.length === 0 || !isNaN(pilotName.value) || copilotName.value.length === 0 || !isNaN(copilotName.value);
+     let fuel_CargoNotReady = isNaN(fuelLevel.value) || fuelLevel.value.length === 0 || isNaN(cargoMass.value) || cargoMass.value.length === 0;
+      event.preventDefault();
+      
+      function cargoState() {
+       event.preventDefault();
+       if (cargoMass.value >= 10000) {
+           return "There is too much mass for the shuttle to take off. Reduce mass under 10000" 
+         } else {
+           return `Cargo mass check passed! Cargo Mass:${cargoMass.value}`;
+         }
+     };
    
+     function fuelState(){
+       event.preventDefault();
+       if (fuelLevel.value <= 10000) {
+         return "Fuel level check failed. Please fill fuel over 10000";
+       } else {
+         return `Fuel level check passed! Fuel level: ${fuelLevel.value}`;
+       }
+     };
 
-})
+       function pilotState() {
+    if (!pilot_CopilotNotReady) {
+      return `Pilot ${pilotName.value} is ready`
+    }
+     }; 
 
+        function copilotState() {
+        if (!pilot_CopilotNotReady) {
+          return `CoPilot ${copilotName.value} is ready`
+        }
+         }; 
 
-// window.addEventListener("load", function(){
+         function isReady() {
+            if (fuelLevel.value > 10000 && cargoMass.value < 10000) {
+              return launchStatusCheck.innerHTML = `
+              <h2 id="launchStatus" style="color:green">"Shuttle is ready for launch"</h2>
+                <ul id="itemStatus">
+                    <li id="pilotStatus">${pilotState()}</li>
+                    <li id="copilotStatus">${copilotState()}</li>
+                    <li id="fuelStatus">${fuelState()}</li>
+                    <li id="cargoStatus">${cargoState()}</li>
+                </ul>
+        `;
+             } 
+            };
+ 
 
-//    let formNode = document.getElementById("launchForm");
-//    formNode.addEventListener("submit", function(event){
-//        let nameNode = document.getElementById("name");
-
-//        if (nameNode.value.length === 0) {
-//            event.preventDefault();
-//            let messageNode = document.getElementById("error-message");
-//            messageNode.innerHTML = "Name is required"
-//        }
-
-//    });
-
-
-// })
-
-/* This block of code shows how to format the HTML once you fetch some planetary JSON!
-<h2>Mission Destination</h2>
-<ul>
-   <li>Name: ${}</li>
-   <li>Diameter: ${}</li>
-   <li>Star: ${}</li>
-   <li>Distance from Earth: ${}</li>
-   <li>Number of Moons: ${}</li>
-</ul>
-<img src="${}">
-*/
+     if (pilot_CopilotNotReady) {
+        launchStatusCheck.innerHTML = `
+      
+        <h2 id="launchStatus">Awaiting Information Before Launch</h2>
+          <ul id="itemStatus">
+              <li id="pilotStatus"></li>
+              <li id="copilotStatus"></li>
+              <li id="fuelStatus"></li>
+              <li id="cargoStatus"></li>
+          </ul>
+        `;
+          alert("Please enter a word for pilot and copilot  ")
+          event.preventDefault();
+      } else if (fuel_CargoNotReady){
+        launchStatusCheck.innerHTML = `
+        <h2 id="launchStatus">Awaiting Information Before Launch</h2>
+          <ul id="itemStatus">
+              <li id="pilotStatus"></li>
+              <li id="copilotStatus"></li>
+              <li id="fuelStatus"></li>
+              <li id="cargoStatus"></li>
+          </ul>
+        `;
+        alert("Please enter a number for fuelLevel and cargoMass")
+        event.preventDefault();
+      }  else if (!fuel_CargoNotReady || !pilot_CopilotNotReady){
+        event.preventDefault();
+        launchStatusCheck.innerHTML = `
+        <h2 id="launchStatus" style="color:red">"Shuttle not ready for launch"</h2>
+          <ul id="itemStatus">
+              <li id="pilotStatus">${pilotState()}</li>
+              <li id="copilotStatus">${copilotState()}</li>
+              <li id="fuelStatus">${fuelState()}</li>
+              <li id="cargoStatus">${cargoState()}</li>
+          </ul>
+        `;
+        isReady()
+      }
+ 
+    });
+ 
+ });
