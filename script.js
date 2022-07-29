@@ -16,7 +16,6 @@ window.addEventListener("load", function(){
       event.preventDefault();
       
       function cargoState() {
-       event.preventDefault();
        if (cargoMass.value >= 10000) {
            return "There is too much mass for the shuttle to take off. Reduce mass under 10000" 
          } else {
@@ -25,7 +24,6 @@ window.addEventListener("load", function(){
      };
    
      function fuelState(){
-       event.preventDefault();
        if (fuelLevel.value <= 10000) {
          return "Fuel level check failed. Please fill fuel over 10000";
        } else {
@@ -72,7 +70,6 @@ window.addEventListener("load", function(){
           </ul>
         `;
           alert("Please enter a word for pilot and copilot  ")
-          event.preventDefault();
       } else if (fuel_CargoNotReady){
         launchStatusCheck.innerHTML = `
         <h2 id="launchStatus">Awaiting Information Before Launch</h2>
@@ -84,9 +81,7 @@ window.addEventListener("load", function(){
           </ul>
         `;
         alert("Please enter a number for fuelLevel and cargoMass")
-        event.preventDefault();
       }  else if (!fuel_CargoNotReady || !pilot_CopilotNotReady){
-        event.preventDefault();
         launchStatusCheck.innerHTML = `
         <h2 id="launchStatus" style="color:red">"Shuttle not ready for launch"</h2>
           <ul id="itemStatus">
